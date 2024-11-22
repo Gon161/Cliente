@@ -12,7 +12,13 @@ namespace Cliente
         {
             SocketCliente peticion = new SocketCliente("192.168.1.101", 8381);
             peticion.Connect();
-            peticion.Send("Hola");
+            List<int> lista = new List<int> { 1,2, 3 };
+
+            Request request = new Request();
+            request.Metodo = "Suma";
+            request.Parametros = Newtonsoft.Json.JsonConvert.SerializeObject(lista);    
+
+            peticion.Send(Newtonsoft.Json.JsonConvert.SerializeObject(request));
             string a = peticion.Recived();
             Console.ReadKey();
         }
